@@ -1,0 +1,238 @@
+<html>
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+    <style>
+        .dropdown-content {
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+input[type=checkbox] {
+  transform: scale(1.5);
+  margin-top: 5px;
+}
+.row{
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-top: 10px;
+}
+.auto-complete{width: 150%;}
+label{
+    margin-left:10px; 
+}
+ul{
+    margin-top: -.3rem;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    text-indent: 0;
+}
+li{
+    height: 4.8rem;
+    position: relative;
+}
+li a{
+    display: grid;
+    padding: 0 1.8rem 0 2rem;
+    -ms-grid-columns: 2.8rem 1fr auto auto auto;
+    grid-template-columns: 2.8rem 1fr auto auto auto;
+    -ms-grid-rows: 2.4rem 2.4rem;
+    grid-template-rows: 2.4rem 2.4rem;
+    align-items: center;
+    display: flex;
+    height: 4.8rem;
+    justify-content: flex-start;
+    padding: 0 1.2rem 0 5.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 2.8rem;
+    padding: 0 1.2rem 0 5.6rem;
+    cursor: pointer;
+    display: block;
+    color: #484644;
+    text-decoration: none;
+    background-color: transparent;
+}
+ul
+{
+    list-style-type: none;
+}
+
+div ul li
+{
+    margin: 5px;
+}    
+
+img
+{
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-top: 9px;
+    margin-left: 10;
+    height: 50px;
+    width: 50px;
+}
+div ul li p
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 11px;
+    margin-bottom: 0px;
+}
+li input[type="checkbox"]{
+    float: right;
+    margin-right: 15px;
+    margin-top: 32px;
+}
+li:hover{
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+        </style>
+</head>
+
+<body>
+    <hr>
+    <div class="container">
+        <div class="col-md-4">
+            <div class="inner-addon right-addon auto-complete">
+                <input type="text" id="user" class="form-control">
+                </input>
+                <div class="dropdown-content">
+                    <div class="search">
+                        <i class="glyphicon glyphicon-user fas fa-search"></i>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="input-group input-group-sm">
+                                <input type="checkbox" id="chkSelectAll" value="0" />
+                                <label class="checkbox-inline" aria-describedby="chkSelectAll" id="lblSelectAll" for="chkSelectAll">Select
+                                    All</label>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="input-group input-group-sm">
+                                <input type="checkbox" id="chkInActive" value="0" />
+                                <label class="checkbox-inline" aria-describedby="chkInActive" id="lnkInActive" for="chkInActive">Include
+                                    Inactive Clients</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="client">
+                        <ul>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#user').click(function () {
+            $(".dropdown-content").show();
+        });
+        var clients = [{
+                "fName": "Lalit",
+                "lName": "Patil",
+                "imgUrl": "http://www.ilanelanzen.com/wp-content/uploads/2016/12/dreamstime_s_65067786-794x530.jpg",
+            },
+            {
+                "fName": "Ankita",
+                "lName": "S",
+                "imgUrl": "http://www.ilanelanzen.com/wp-content/uploads/2016/12/dreamstime_s_56680534.jpg",
+            },
+            {
+                "fName": "Abhay",
+                "lName": "Patil",
+                "imgUrl": "http://www.ilanelanzen.com/wp-content/uploads/2017/01/dreamstime_s_25973399.jpg",
+            },
+            {
+                "fName": "Shruti",
+                "lName": "Kulkarni",
+                "imgUrl": "http://www.ilanelanzen.com/wp-content/uploads/2016/12/dreamstime_s_28750810.jpg",
+            },
+            {
+                "fName": "Umesh",
+                "lName": "Soni",
+                "imgUrl": "http://www.ilanelanzen.com/wp-content/uploads/2016/06/dreamstime_s_35693383.jpg",
+            }
+        ];
+        var selectedClients =[];
+        bindClients();
+        function bindClients() {
+            var clientObj = '';
+            for (var key in clients) {
+                if (clients.hasOwnProperty(key)) {
+                    clientObj += '<li><img src="' + clients[key]["imgUrl"] + '" />';
+                    clientObj += '<p>' + clients[key]["fName"] + ' '+clients[key]["lName"]+'</p>';
+                    clientObj += '<input type="checkbox" id="chkInActive'+key+'" value="' + clients[key]["fName"] + '" /></li>';
+                }
+            }
+            $('ul').append(clientObj);
+        }
+        selectAll();
+        function selectAll() {
+                    $('#chkSelectAll').change(function() {                        
+                            $('ul input[type=checkbox]').prop('checked',this.checked).trigger('change');
+                    });
+        }
+        selectClient();
+        function selectClient() {
+            $('ul input[type=checkbox]').change(function(){
+                if (this.checked) {
+                    selectedClients.push($(this).val());
+                }
+                else{
+                    selectedClients.pop($(this).val());
+                }
+            })
+        }
+
+        function bindUsers() {
+            
+        }
+
+        
+    </script>
+</body>
+
+</html>
